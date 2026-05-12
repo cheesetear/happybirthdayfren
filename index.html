@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Happy Birthday, Chester | Stay Strong ✨</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      background: radial-gradient(circle at 30% 10%, #c1f0ff, #7bcbd8, #4ba6b5);
+      font-family: 'Poppins', 'Segoe UI', system-ui, -apple-system, 'Inter', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      position: relative;
+      overflow-x: hidden;
+      animation: bodyGlowFade 1s ease-out;
+    }
+
+    @keyframes bodyGlowFade {
+      0% { opacity: 0; backdrop-filter: blur(5px); }
+      100% { opacity: 1; backdrop-filter: blur(0); }
+    }
+
+    /* floating particles canvas */
+    #particle-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* main glass container with extra shimmer animation */
+    .birthday-container {
+      position: relative;
+      z-index: 10;
+      max-width: 1300px;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(16px);
+      border-radius: 3rem;
+      padding: 2rem 2rem 2.5rem;
+      box-shadow: 0 30px 50px rgba(0, 130, 150, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.6) inset, 0 0 25px rgba(0, 255, 255, 0.4);
+      transition: all 0.4s ease;
+      animation: containerFloat 1.2s cubic-bezier(0.2, 0.9, 0.4, 1.1), glowPulse 3s infinite alternate;
+    }
+
+    @keyframes containerFloat {
+      0% { opacity: 0; transform: scale(0.96) translateY(30px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    @keyframes glowPulse {
+      0% { box-shadow: 0 30px 50px rgba(0, 130, 150, 0.2), 0 0 0 1px rgba(255,255,240,0.4) inset, 0 0 15px cyan; }
+      100% { box-shadow: 0 35px 60px rgba(0, 200, 220, 0.5), 0 0 0 2px rgba(255,255,245,0.7) inset, 0 0 35px #5efff0; }
+    }
+
+    /* image gallery layout */
+    .gallery-layout {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+      align-items: center;
+      justify-content: center;
+      margin: 2rem 0 2rem;
+    }
+
+    .side-images {
+      flex: 1;
+      min-width: 110px;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    .center-image {
+      flex: 2;
+      min-width: 240px;
+      text-align: center;
+    }
+
+    /* glassmorphic image cards + enhanced animations */
+    .img-card {
+      background: rgba(255, 255, 255, 0.25);
+      border-radius: 32px;
+      padding: 6px;
+      backdrop-filter: blur(6px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.2);
+      border: 1px solid rgba(0, 255, 255, 0.6);
+      animation: cardGlideIn 0.7s backwards;
+    }
+
+    @keyframes cardGlideIn {
+      0% { opacity: 0; transform: translateY(35px) scale(0.94); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .img-card:hover {
+      transform: translateY(-12px) scale(1.02);
+      box-shadow: 0 28px 38px rgba(0, 200, 210, 0.5), 0 0 18px cyan, 0 0 8px #aaffff;
+      border-color: #ffffff;
+      background: rgba(255, 255, 255, 0.4);
+    }
+
+    .side-images .img-card {
+      width: 100%;
+      max-width: 170px;
+      margin: 0 auto;
+    }
+
+    .center-image .img-card {
+      display: inline-block;
+      max-width: 360px;
+      width: 100%;
+      transition: 0.4s;
+      animation: centerPop 0.9s cubic-bezier(0.2, 0.8, 0.4, 1.2);
+    }
+
+    @keyframes centerPop {
+      0% { transform: scale(0.85); opacity: 0; filter: blur(4px); }
+      80% { transform: scale(1.02); }
+      100% { transform: scale(1); opacity: 1; filter: blur(0); }
+    }
+
+    img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 26px;
+      object-fit: cover;
+      aspect-ratio: 1 / 1;
+    }
+
+    /* Title & name animations */
+    .title-section {
+      text-align: center;
+      margin-bottom: 1rem;
+      animation: titleWave 1s ease-out;
+    }
+
+    @keyframes titleWave {
+      0% { opacity: 0; letter-spacing: -5px; transform: scale(0.9); }
+      100% { opacity: 1; letter-spacing: normal; transform: scale(1); }
+    }
+
+    .happy-birthday {
+      font-size: clamp(2.2rem, 8vw, 4.5rem);
+      font-weight: 800;
+      background: linear-gradient(125deg, #096B7A, #29cdc3, #d4f3ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 2px 20px rgba(0, 230, 230, 0.6);
+      letter-spacing: -0.5px;
+      animation: textGlowShift 2s infinite alternate;
+    }
+
+    @keyframes textGlowShift {
+      0% { filter: drop-shadow(0 0 3px cyan); }
+      100% { filter: drop-shadow(0 0 15px #6efff0); }
+    }
+
+    .chestername {
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: #fff3ea;
+      text-shadow: 0 0 12px cyan, 0 0 4px #0099aa;
+      background: rgba(0, 130, 140, 0.4);
+      display: inline-block;
+      padding: 0.25rem 1.5rem;
+      border-radius: 60px;
+      backdrop-filter: blur(12px);
+      animation: nameBounce 2s ease infinite;
+    }
+
+    @keyframes nameBounce {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); text-shadow: 0 0 20px cyan; }
+    }
+
+    /* UPDATED MESSAGE CARD - emotional & strong wording for Chester */
+    .message-card {
+      background: rgba(255, 255, 255, 0.38);
+      backdrop-filter: blur(14px);
+      border-radius: 2rem;
+      padding: 1.6rem 2rem;
+      margin: 2rem 0 1rem;
+      text-align: center;
+      border: 1px solid rgba(0, 255, 255, 0.7);
+      box-shadow: 0 15px 35px rgba(0, 140, 160, 0.3);
+      transition: 0.4s;
+      animation: messageFloatRise 1.1s ease-out, borderGlow 2s infinite alternate;
+    }
+
+    @keyframes messageFloatRise {
+      0% { opacity: 0; transform: translateY(50px) rotateX(-5deg); }
+      100% { opacity: 1; transform: translateY(0) rotateX(0); }
+    }
+
+    @keyframes borderGlow {
+      0% { border-color: rgba(0, 255, 255, 0.5); box-shadow: 0 8px 25px rgba(0,150,170,0.2); }
+      100% { border-color: rgba(0, 255, 255, 1); box-shadow: 0 15px 35px rgba(0,210,230,0.6); }
+    }
+
+    .message-card p {
+      font-size: 1.28rem;
+      line-height: 1.6;
+      color: #02262e;
+      font-weight: 550;
+      text-shadow: 0 1px 1px rgba(255,250,210,0.8);
+    }
+
+    .message-card .signature-bra {
+      margin-top: 1.2rem;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #016f7a;
+      letter-spacing: 1px;
+      background: rgba(0,0,0,0.05);
+      display: inline-block;
+      padding: 0.4rem 1.4rem;
+      border-radius: 60px;
+    }
+
+    /* extra animation elements: floating plus sign & shine */
+    .extra-sparkle {
+      position: absolute;
+      pointer-events: none;
+      z-index: 5;
+    }
+
+    /* responsive design */
+    @media (max-width: 750px) {
+      .gallery-layout {
+        flex-direction: column;
+      }
+      .side-images {
+        flex-direction: row;
+        justify-content: center;
+        gap: 1rem;
+        width: 100%;
+      }
+      .side-images .img-card {
+        max-width: 135px;
+      }
+      .center-image .img-card {
+        max-width: 280px;
+      }
+      .birthday-container {
+        padding: 1.5rem;
+      }
+      .message-card p {
+        font-size: 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .side-images .img-card {
+        max-width: 100px;
+      }
+      .happy-birthday {
+        font-size: 1.8rem;
+      }
+      .chestername {
+        font-size: 1.2rem;
+      }
+    }
+
+    /* Shimmer underline effect */
+    .shimmer-line {
+      height: 3px;
+      width: 100px;
+      background: linear-gradient(90deg, transparent, cyan, white, cyan, transparent);
+      margin: 12px auto 0;
+      border-radius: 10px;
+      animation: shimmerMove 2s infinite linear;
+    }
+
+    @keyframes shimmerMove {
+      0% { background-position: -200px; }
+      100% { background-position: 200px; }
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="particle-canvas"></canvas>
+
+  <div class="birthday-container">
+    <div class="title-section">
+      <div class="happy-birthday">🎂 HAPPY 18TH BIRTHDAY, CHESTER 🎈</div>
+      <div class="chestername">WAZAAAAAAAAAA</div>
+      <div class="shimmer-line"></div>
+    </div>
+
+    <!-- IMAGE GALLERY -->
+    <div class="gallery-layout">
+      <!-- LEFT side: waje4.jpg & waje5.jpg -->
+      <div class="side-images">
+        <div class="img-card">
+          <img src="waje4.jpg" alt="Chester memory 4" onerror="this.src='https://placehold.co/400x400?text=waje4.jpg&font=poppins'; this.style.opacity='0.9'">
+        </div>
+        <div class="img-card">
+          <img src="waje5.jpg" alt="Chester memory 5" onerror="this.src='https://placehold.co/400x400?text=waje5.jpg&font=poppins'; this.style.opacity='0.9'">
+        </div>
+      </div>
+
+      <!-- CENTER large featured: waje1.jpg -->
+      <div class="center-image">
+        <div class="img-card">
+          <img src="waje1.jpg" alt="Chester spotlight" onerror="this.src='https://placehold.co/600x600?text=waje1.jpg&font=poppins'; this.style.opacity='0.9'">
+        </div>
+      </div>
+
+      <!-- RIGHT side: waje2.jpg & waje3.jpg -->
+      <div class="side-images">
+        <div class="img-card">
+          <img src="waje2.jpg" alt="Chester memory 2" onerror="this.src='https://placehold.co/400x400?text=waje2.jpg&font=poppins'; this.style.opacity='0.9'">
+        </div>
+        <div class="img-card">
+          <img src="waje3.jpg" alt="Chester memory 3" onerror="this.src='https://placehold.co/400x400?text=waje3.jpg&font=poppins'; this.style.opacity='0.9'">
+        </div>
+      </div>
+    </div>
+
+    <!-- HEARTFELT MESSAGE - replaced with Chester's custom motivational text -->
+    <div class="message-card">
+      <p>
+        🎉 Happy Birthday, Chester! 🎉<br><br>
+        I know you like, erm… you know, that sad or feel empty side — but you know,<br> 
+        you just gotta move forward. Don't overthink too much and don't let it eat ya alive, brah.<br>
+        Just lock in and stay strong, brah. You still got a lot of journey to go through, okiiii?<br>
+        🌊 Stay strong, brah. We got your back. 🤍 :D
+      </p>
+      <div class="signature-bra">explore more brah✨</div>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      // ---------- ENHANCED FLOATING PARTICLES + HEARTS + CINEMATIC ANIMATION ----------
+      const canvas = document.getElementById('particle-canvas');
+      let ctx = canvas.getContext('2d');
+      let width, height;
+      let particles = [];
+
+      function resizeCanvas() {
+        width = window.innerWidth;
+        height = window.innerHeight;
+        canvas.width = width;
+        canvas.height = height;
+      }
+      window.addEventListener('resize', () => {
+        resizeCanvas();
+        initParticles(110);
+      });
+
+      class Particle {
+        constructor(x, y, size, speedX, speedY, color, type, glowIntensity = 0.7) {
+          this.x = x;
+          this.y = y;
+          this.size = size;
+          this.speedX = speedX;
+          this.speedY = speedY;
+          this.color = color;
+          this.type = type; // 'heart', 'circle', 'star'
+          this.alpha = Math.random() * 0.7 + 0.3;
+          this.glow = glowIntensity;
+          this.rotation = Math.random() * Math.PI * 2;
+        }
+        update() {
+          this.x += this.speedX;
+          this.y += this.speedY;
+
+          // gentle drift & wraparound for infinite flow
+          if (this.x > width + 70) this.x = -70;
+          if (this.x < -70) this.x = width + 70;
+          if (this.y > height + 100) {
+            this.y = -40;
+            this.x = Math.random() * width;
+          }
+          if (this.y < -80) {
+            this.y = height + 60;
+            this.x = Math.random() * width;
+          }
+          // subtle opacity change for twinkling
+          this.alpha = 0.45 + Math.sin(Date.now() * 0.0025 * this.size) * 0.25;
+        }
+        draw(ctx) {
+          ctx.save();
+          ctx.shadowBlur = 12;
+          ctx.shadowColor = 'cyan';
+          ctx.globalAlpha = this.alpha;
+          ctx.fillStyle = this.color;
+
+          if (this.type === 'heart') {
+            const s = this.size * 0.9;
+            ctx.beginPath();
+            const x = this.x, y = this.y;
+            ctx.moveTo(x, y + s * 0.3);
+            ctx.bezierCurveTo(x, y, x - s/2, y, x - s/2, y + s * 0.3);
+            ctx.bezierCurveTo(x - s/2, y + s * 0.55, x, y + s, x, y + s);
+            ctx.bezierCurveTo(x, y + s, x + s/2, y + s * 0.55, x + s/2, y + s * 0.3);
+            ctx.bezierCurveTo(x + s/2, y, x, y, x, y + s * 0.3);
+            ctx.fill();
+          } 
+          else if (this.type === 'star') {
+            let spikes = 5;
+            let outerR = this.size;
+            let innerR = this.size * 0.45;
+            let rot = Math.PI / 2 * 3;
+            let step = Math.PI / spikes;
+            ctx.beginPath();
+            for (let i = 0; i < spikes; i++) {
+              let x1 = this.x + Math.cos(rot) * outerR;
+              let y1 = this.y + Math.sin(rot) * outerR;
+              ctx.lineTo(x1, y1);
+              rot += step;
+              let x2 = this.x + Math.cos(rot) * innerR;
+              let y2 = this.y + Math.sin(rot) * innerR;
+              ctx.lineTo(x2, y2);
+              rot += step;
+            }
+            ctx.closePath();
+            ctx.fill();
+          }
+          else {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size * 0.65, 0, Math.PI * 2);
+            ctx.fill();
+          }
+          ctx.restore();
+        }
+      }
+
+      function initParticles(count) {
+        particles = [];
+        const heartColors = ['#ffb7c9', '#ff9eb2', '#ffe0ed', '#ffc0d0', '#ffffff'];
+        const starColors = ['#ccf5ff', '#a3f0ff', '#7ae0ff', '#b0ffff'];
+        const circleColors = ['#2dd4bf', '#0ae0f0', '#87f5ff', '#b3eefc', '#3bc9db'];
+        
+        for (let i = 0; i < count; i++) {
+          let r = Math.random();
+          let type = 'circle';
+          if (r < 0.45) type = 'heart';
+          else if (r < 0.7) type = 'star';
+          else type = 'circle';
+          
+          let size = Math.random() * 15 + 4;
+          let x = Math.random() * width;
+          let y = Math.random() * height;
+          let speedX = (Math.random() - 0.5) * 0.45;
+          let speedY = (Math.random() - 0.6) * 0.4 - 0.15;
+          let color;
+          if (type === 'heart') color = heartColors[Math.floor(Math.random() * heartColors.length)];
+          else if (type === 'star') color = starColors[Math.floor(Math.random() * starColors.length)];
+          else color = circleColors[Math.floor(Math.random() * circleColors.length)];
+          
+          particles.push(new Particle(x, y, size, speedX, speedY, color, type));
+        }
+        // extra floating tiny cyan dots (glitter)
+        for (let i=0; i<55; i++) {
+          particles.push(new Particle(
+            Math.random() * width, Math.random() * height,
+            Math.random() * 5 + 2,
+            (Math.random() - 0.5) * 0.7, (Math.random() - 0.6) * 0.5,
+            '#b9ffff', 'circle'
+          ));
+        }
+      }
+
+      function animateParticles() {
+        if (!ctx) return;
+        ctx.clearRect(0, 0, width, height);
+        for (let p of particles) {
+          p.update();
+          p.draw(ctx);
+        }
+        requestAnimationFrame(animateParticles);
+      }
+
+      resizeCanvas();
+      initParticles(130);
+      animateParticles();
+
+      // Continuously add new sparkles/particles for dynamic feel
+      setInterval(() => {
+        if (particles.length < 210) {
+          let newType = Math.random() > 0.5 ? 'heart' : 'star';
+          let col = newType === 'heart' ? '#ffbfd5' : '#9efff0';
+          particles.push(new Particle(
+            Math.random() * width,
+            height - 15,
+            Math.random() * 11 + 5,
+            (Math.random() - 0.5) * 0.5,
+            -Math.random() * 1.1 - 0.2,
+            col,
+            newType
+          ));
+        }
+      }, 1900);
+
+      // Additional "Glow Pulse" interactive event: When clicking on images, extra burst effect (fun)
+      const allImgCards = document.querySelectorAll('.img-card');
+      allImgCards.forEach(card => {
+        card.addEventListener('click', (e) => {
+          // create 12 temporary particles at click position as celebration sparks
+          const rect = card.getBoundingClientRect();
+          const centerX = rect.left + rect.width / 2;
+          const centerY = rect.top + rect.height / 2;
+          for (let i = 0; i < 20; i++) {
+            let angle = Math.random() * Math.PI * 2;
+            let speed = Math.random() * 2 + 0.8;
+            let vx = Math.cos(angle) * speed;
+            let vy = Math.sin(angle) * speed;
+            let size = Math.random() * 9 + 3;
+            let particleBurst = new Particle(
+              centerX, centerY, size, vx, vy,
+              `hsl(${Math.random() * 60 + 160}, 100%, 65%)`, 
+              Math.random() > 0.5 ? 'heart' : 'circle'
+            );
+            particles.push(particleBurst);
+            // Auto remove after 3 sec (memory friendly)
+            setTimeout(() => {
+              const index = particles.indexOf(particleBurst);
+              if (index !== -1) particles.splice(index, 1);
+            }, 2800);
+          }
+        });
+      });
+    })();
+
+    // Additional floating interactive text: no music, but more joyful intro
+    window.addEventListener('load', () => {
+      // inject subtle extra animations to images on load
+      const styleAdd = document.createElement('style');
+      styleAdd.textContent = `
+        .img-card { transition: transform 0.3s ease, box-shadow 0.4s; }
+        .img-card:hover { animation: gentleWobble 0.5s ease; }
+        @keyframes gentleWobble {
+          0% { transform: translateY(-8px) scale(1.02); }
+          80% { transform: translateY(-2px) scale(1.01); }
+          100% { transform: translateY(-12px) scale(1.02); }
+        }
+        .message-card:hover {
+          transform: scale(1.01);
+          backdrop-filter: blur(18px);
+        }
+      `;
+      document.head.appendChild(styleAdd);
+      
+      // Create dynamic sparkling text effect on title
+      const titleEl = document.querySelector('.happy-birthday');
+      if(titleEl) {
+        setInterval(() => {
+          titleEl.style.textShadow = `0 0 ${Math.random() * 12 + 4}px cyan, 0 0 8px white`;
+          setTimeout(() => {
+            titleEl.style.textShadow = `0 2px 20px rgba(0, 230, 230, 0.6)`;
+          }, 200);
+        }, 1300);
+      }
+    });
+  </script>
+  <!-- 
+    ✨ BIRTHDAY WEBSITE FOR CHESTER ✨
+    - Removed music for pure visual/animation experience.
+    - Customized motivational message that Chester can relate to.
+    - Added cinematic floating hearts, stars, particles, glow pulses, click burst effect.
+    - Fully responsive + glassmorphic style. 
+    - Images: waje1.jpg (center), waje2.jpg, waje3.jpg (right), waje4.jpg, waje5.jpg (left).
+    - Easy to replace images by changing src attribute.
+  -->
+</body>
+</html>
